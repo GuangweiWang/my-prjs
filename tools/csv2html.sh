@@ -31,7 +31,7 @@ echo '<table border="1">' >> $output_file
 while read line
 do
   echo "<tr>" >> $output_file
-  out_line=`echo $line | sed "s;,;</th><th>;g" | sed "s;^;<th>&;" | sed "s;$;</th>&;"`
+  out_line=`echo $line | sed "s;,;</td><td>;g" | sed "s;^;<td>&;" | sed "s;$;</td>&;"`
   echo $out_line >> $output_file
   echo "</tr>" >> $output_file
 done < $input_file
