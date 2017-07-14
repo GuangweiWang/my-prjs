@@ -28,12 +28,18 @@ if [ "${output_file}x" == "x" ]; then echo $usage && exit 1 ;fi
 echo "<html>" > $output_file
 echo '<table border="1">' >> $output_file
 
+index=0
 while read line
 do
   echo "<tr>" >> $output_file
+  if [ $index -eq 0 ] ; then #first line, table headline
+  out_line=`echo $line | sed "s;,;</th><th>;g" | sed "s;^;<th>&;" | sed "s;$;</th>&;"`
+  else
   out_line=`echo $line | sed "s;,;</td><td>;g" | sed "s;^;<td>&;" | sed "s;$;</td>&;"`
+  fi
   echo $out_line >> $output_file
   echo "</tr>" >> $output_file
+  index=$[$index + 1]
 done < $input_file
 
 
